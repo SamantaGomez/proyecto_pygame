@@ -4,4 +4,4 @@ from pygame.locals import *
 
 # medidas de la ventana
 WIDTH = 1165
-HEIGHT = 900
+HEIGHT = 800
