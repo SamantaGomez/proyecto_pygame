@@ -57,10 +57,19 @@ class DISCO(pygame.sprite.Sprite):
             self.speed[0] = -self.speed[0]
             self.rect.centerx += self.speed[0] * time
 
-        return puntaje   
+        return puntaje
+		
+class Mango(pygame.sprite.Sprite):
+    def __init__(self, x):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = load_image("mango1.png", True)
+        self.rect = self.image.get_rect()
+        self.rect.centerx = x
+        self.rect.centery = HEIGHT / 2
+        self.speed = 0.9		
 		
 #creacion de la funcion MoverJugador		
-	 def MoverJugador(self, time, keys):
+	 def MoverMango(self, time, keys):
         if self.rect.top >= 0:
             if keys[K_w]:
                 self.rect.centery -= self.speed * time
