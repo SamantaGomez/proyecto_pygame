@@ -57,4 +57,22 @@ class DISCO(pygame.sprite.Sprite):
             self.speed[0] = -self.speed[0]
             self.rect.centerx += self.speed[0] * time
 
-        return puntaje   	
+        return puntaje   
+		
+#creacion de la funcion MoverJugador		
+	 def MoverJugador(self, time, keys):
+        if self.rect.top >= 0:
+            if keys[K_w]:
+                self.rect.centery -= self.speed * time
+        if self.rect.bottom <= HEIGHT:
+            if keys[K_s]:
+                self.rect.centery += self.speed * time
+        if self.rect.centerx<=HEIGHT:
+            if self.rect.bottom <= HEIGHT:
+                if keys[K_d]:
+                    self.rect.centerx += self.speed * time
+        if self.rect.centerx >= 15:
+            if self.rect.bottom <= HEIGHT:
+                if keys[K_a]:
+                    self.rect.centerx -= self.speed * time
+		
