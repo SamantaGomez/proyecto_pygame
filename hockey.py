@@ -99,4 +99,32 @@ def ganador(goles):
             self.distancia = 20
             self.posX = 50
             self.posY = 50
+			
+		def teclado(self, evento):
 		
+			if goles == 0:
+				registro()
+				
+			#else:
+			#	print ("hola")
+			for accion in evento:
+				if accion.type == KEYDOWN:
+					if accion.key == K_RETURN:
+						self.caracteres.append('')
+						print("Guardado")
+						marcador = goles
+						dato = "Player: " + str(self.caracteres)+ "Puntaje: " +str(marcador)
+						grabartxt()
+						registro()
+						
+					elif accion.key == K_ESCAPE:
+						print("SALIO DEL JUEGO")
+						sys.exit()
+					elif accion.key == K_BACKSPACE:
+						if self.caracteres[self.lineas] == '' and self.lineas>0:
+							self.caracteres = self.caracteres[0:-1]
+						else:
+							self.caracteres[self.lineas]= self.caracteres[self.lineas][0:-1]
+							
+					else:
+						self.caracteres[self.lineas]= str(self.caracteres[self.lineas] +accion.unicode)
