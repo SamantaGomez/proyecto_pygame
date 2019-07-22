@@ -84,4 +84,19 @@ class Mango(pygame.sprite.Sprite):
             if self.rect.bottom <= HEIGHT:
                 if keys[K_a]:
                     self.rect.centerx -= self.speed * time
+					
+					
+#funcion ganador indico la sintaxis y en donde va a estar tanto en X como en Y
+
+def ganador(goles):
+
+    class Inicio():
+        def __init__(self, ):
+            self.lineas = 0
+            self.caracteres = ['', ]
+            self.fuente = pygame.font.Font(None, 25)
+
+            self.distancia = 20
+            self.posX = 50
+            self.posY = 50
 		
