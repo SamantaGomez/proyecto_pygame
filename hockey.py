@@ -68,7 +68,7 @@ class Mango(pygame.sprite.Sprite):
         self.rect.centery = HEIGHT / 2
         self.speed = 0.9		
 		
-#creacion de la funcion MoverJugador		
+#creacion de la funcion MoverMango		
 	 def MoverMango(self, time, keys):
         if self.rect.top >= 0:
             if keys[K_w]:
@@ -128,3 +128,9 @@ def ganador(goles):
 							
 					else:
 						self.caracteres[self.lineas]= str(self.caracteres[self.lineas] +accion.unicode)
+		   def peticion(self, superficie):
+            for self.lineas in range(len(self.caracteres)):
+                Img_letra = self.fuente.render(self.caracteres[self.lineas], True, (43, 233, 17))
+                superficie.blit(Img_letra, (self.posX, self.posY + self.distancia * self.lineas))
+                peticion = self.fuente.render(("Ingrese su Apodo"), 0, (26, 45, 225))
+                superficie.blit(peticion, (10, 30))
