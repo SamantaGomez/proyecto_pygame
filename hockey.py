@@ -154,4 +154,8 @@ def ganador(goles):
                 superficie.blit(lista, (40, valorY))
             archi.close()
 
-			
+	#funcion para grabar los datos que ya se han leido		
+    def grabartxt(dato):
+        archi = open('datos.txt', 'a')
+        archi.write(dato + "\n")
+        archi.close()	
