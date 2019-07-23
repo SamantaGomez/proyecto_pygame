@@ -128,9 +128,14 @@ def ganador(goles):
 							
 					else:
 						self.caracteres[self.lineas]= str(self.caracteres[self.lineas] +accion.unicode)
-		   def peticion(self, superficie):
+		def peticion(self, superficie):
             for self.lineas in range(len(self.caracteres)):
                 Img_letra = self.fuente.render(self.caracteres[self.lineas], True, (43, 233, 17))
                 superficie.blit(Img_letra, (self.posX, self.posY + self.distancia * self.lineas))
                 peticion = self.fuente.render(("Ingrese su Apodo"), 0, (26, 45, 225))
                 superficie.blit(peticion, (10, 30))
+				
+		def creartxt(self, ):
+            archi = open('datos.txt', 'w')
+            archi.close()		
+			
