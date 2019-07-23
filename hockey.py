@@ -135,7 +135,23 @@ def ganador(goles):
                 peticion = self.fuente.render(("Ingrese su Apodo"), 0, (26, 45, 225))
                 superficie.blit(peticion, (10, 30))
 				
+			pygame.display.flip()
+				
 		def creartxt(self, ):
             archi = open('datos.txt', 'w')
-            archi.close()		
+            archi.close()	
+		
+		#Se crea una funcion para leer los datos 
+		def leertxt(self, superficie):
+            archi = open('datos.txt', 'r')
+            linea = archi.readline()
+            valorY = 0
+            while linea != "":
+                # print(linea)
+                linea = archi.readline()
+                lista = self.fuente.render(str(linea), 0, ( 17, 17, 20))
+                valorY = valorY + 65
+                superficie.blit(lista, (40, valorY))
+            archi.close()
+
 			
