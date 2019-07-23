@@ -159,3 +159,9 @@ def ganador(goles):
         archi = open('datos.txt', 'a')
         archi.write(dato + "\n")
         archi.close()	
+		
+	#Funcion para los registros 
+	def registro():
+        pygame.mixer.music.stop()
+        if __name__ == '__main__':
+            salir = False
