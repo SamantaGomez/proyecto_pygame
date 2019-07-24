@@ -201,3 +201,25 @@ def ganador(goles):
             pygame.display.set_caption("******REGISTRO DE PUNTAJES******")
             estiloLetra = pygame.font.SysFont("Bauhaus 93", 35)
             fondo = pygame.image.load("puntages.jpg").convert()
+#MUSICA PARA EL MENU
+            pygame.init()
+            sonMenu = pygame.mixer.music.load("menu.mp3")
+            pygame.mixer.music.play(1)
+
+            ingresoTXT = Entrada()
+            while not salir:
+                eventos = pygame.event.get()
+
+                screen.blit(fondo, (0, 0))
+
+                mensaje = estiloLetra.render(("REGISTRO DE PUNTAJES"), 0, (206, 30, 4))
+                screen.blit(mensaje, (310, 0))
+                ingresoTXT.teclas(eventos)
+                ingresoTXT.mensaje(screen)
+                ingresoTXT.leertxt(screen)
+                # display.update()
+                pygame.display.flip()
+                pygame.time.delay(400)
+            pygame.display.flip()
+
+    puntos()
