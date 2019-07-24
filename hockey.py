@@ -190,3 +190,14 @@ def ganador(goles):
                 pygame.display.flip()
                 pygame.time.delay(400)
             pygame.display.flip()
+    def puntos(): #Aqui registraremos los puntos de cada jugador 
+        print("Llego a puntos")
+        if __name__ == '__main__':
+
+            salir = False
+
+            pygame.font.init()
+            screen = pygame.display.set_mode((894, 550))
+            pygame.display.set_caption("******REGISTRO DE PUNTAJES******")
+            estiloLetra = pygame.font.SysFont("Bauhaus 93", 35)
+            fondo = pygame.image.load("puntages.jpg").convert()
