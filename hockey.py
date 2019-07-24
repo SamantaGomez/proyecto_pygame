@@ -165,3 +165,28 @@ def ganador(goles):
         pygame.mixer.music.stop()
         if __name__ == '__main__':
             salir = False
+
+	    pygame.init()
+            pygame.font.init()
+            screen = pygame.display.set_mode((894, 550))
+            pygame.display.set_caption("******Puntajes******")
+            estiloLetra = pygame.font.SysFont("Arial Black", 45)
+            fondo = pygame.image.load("puntages.jpg").convert()
+            sonMenu = pygame.mixer.music.load("puntagesM.mp3")
+            pygame.mixer.music.play(1)
+            ingresoTXT = Entrada()
+            screen.blit(fondo, (0, 0))
+            while not salir:
+                mensaje = estiloLetra.render(("PUNTAJES "), 0, (7, 32, 250))
+                screen.blit(mensaje, (310, 0))
+                eventos = pygame.event.get()
+                for action in eventos:
+                    """if action.key == K_ESCAPE:
+                        sys.exit()"""
+                    if action.type == pygame.MOUSEBUTTONDOWN:
+                        menu_inicio()
+
+                ingresoTXT.leertxt(screen)
+                pygame.display.flip()
+                pygame.time.delay(400)
+            pygame.display.flip()
