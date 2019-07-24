@@ -241,4 +241,10 @@ def texto(texto, posx, posy, color=(255, 255, 255)):
     salida_rect.centerx = posx
     salida_rect.centery = posy
     return salida, salida_rect
-
+#Musica de fondo durante el juego
+def sonido():
+    pygame.init()
+    sonGolpe = pygame.mixer.music.load("musica.mp3")
+    pygame.mixer.music.play(3)
+    print("Fondo Musical")
+    pygame.mixer.Sound.stop()
