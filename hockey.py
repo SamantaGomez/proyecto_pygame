@@ -191,16 +191,16 @@ def ganador(goles):
                 pygame.time.delay(400)
             pygame.display.flip()
     def puntos(): #Aqui registraremos los puntos de cada jugador 
-        print("Llego a puntos")
+        print("Puntaje : ")
         if __name__ == '__main__':
 
             salir = False
 
             pygame.font.init()
             screen = pygame.display.set_mode((894, 550))
-            pygame.display.set_caption("******REGISTRO DE PUNTAJES******")
+            pygame.display.set_caption("******TABLA DE PUNTAJES******")
             estiloLetra = pygame.font.SysFont("Bauhaus 93", 35)
-            fondo = pygame.image.load("puntages.jpg").convert()
+            fondo = pygame.image.load("puntajes.jpg").convert()
 #MUSICA PARA EL MENU
             pygame.init()
             sonMenu = pygame.mixer.music.load("menu.mp3")
@@ -212,7 +212,7 @@ def ganador(goles):
 
                 screen.blit(fondo, (0, 0))
 
-                mensaje = estiloLetra.render(("REGISTRO DE PUNTAJES"), 0, (206, 30, 4))
+                mensaje = estiloLetra.render(("TABLA DE PUNTAJES"), 0, (206, 30, 4))
                 screen.blit(mensaje, (310, 0))
                 ingresoTXT.teclas(eventos)
                 ingresoTXT.mensaje(screen)
@@ -223,3 +223,22 @@ def ganador(goles):
             pygame.display.flip()
 
     puntos()
+def load_image(filename, transparent=False): #Retencion de las imagenes dentro del tablero
+    try:
+        image = pygame.image.load(filename)
+    except pygame.error as message:
+        raise
+    image = image.convert()
+    if transparent:
+        color = image.get_at((0, 0))
+        image.set_colorkey(color, RLEACCEL)
+    return image
+
+def texto(texto, posx, posy, color=(255, 255, 255)):
+    fuente = pygame.font.Font(None, 50)
+    salida = pygame.font.Font.render(fuente, texto, 1, color)
+    salida_rect = salida.get_rect()
+    salida_rect.centerx = posx
+    salida_rect.centery = posy
+    return salida, salida_rect
+
