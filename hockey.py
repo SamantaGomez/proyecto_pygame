@@ -316,3 +316,32 @@ def main(decicion):
                 sonGolpe = pygame.mixer.music.load("golpe.mp3")
                 pygame.mixer.music.play(1)
                 contP2= contP2+1
+				
+			#NOS MUESTRA EL TIEMPO QUE TENEMOS PARA JUGAR     
+            mensajeReloj = estiloLetra.render("Tiempo :" + str(tiempoMaximo), 0,colorTiempo)  # mensaje de reloj en pantalla
+            screen.blit(mensajeReloj, (465, 0))  # aparicion de reloj en pantalla
+            if int(tiempoMaximo) == 0:
+                score=0
+                print("Cumple la condicion de tiempo")
+                if puntos[0] > puntos[1]:
+                    print("Ganador jugador 1 !!!!!!!!!!!!!!!!!!!!!")
+                    pygame.time.wait(4000)
+                    score=auxTime*puntos[0]
+                    print("Puntage total de jugador 1: "+str(score))
+                    ganadore(score)
+                    # irREgistro()
+                    # sys.exit(0)
+                elif puntos[0] < puntos[1]:
+                    print("Ganador jugador 2 !!!!!!!!!!!!!!!!!!!!!")
+                    pygame.time.wait(4000)
+                    score=auxTime*puntos[1]
+                    print("Puntage total de jugador 2: "+str(score))
+                    ganadore(score)
+                else:
+                    print("Juego empatado")
+                    print("Puntage total de jugador 1: "+str(puntos[0]))
+                    print("Puntage total de jugador 1: " + str(puntos[1]))
+                    puntajes()
+
+            pygame.display.flip()
+        return 0
