@@ -345,3 +345,21 @@ def main(decicion):
 
             pygame.display.flip()
         return 0
+def puntos():#funcion donde me idnica el final del puntaje y a cuantos puntos llego cada uno 
+    print("Llego a puntos")
+    if __name__ == '__main__':
+
+        salir = False
+
+        pygame.font.init()#inicializa
+        screen = pygame.display.set_mode((894, 550))
+        pygame.display.set_caption("******Puntajes******")#idico los puntajes, muestroo mensaje en tablero inicial
+        estiloLetra = pygame.font.SysFont("Castellar", 45)#defino letra y tamaño y tipo 
+        fondo = pygame.image.load("puntajes.png").convert()#mando a llamar a tablero inicial imagen inicial
+        menu = Menu(opciones)
+        # ----------inicio de sonido de menu
+        pygame.init()
+        sonMenu = pygame.mixer.music.load("PuntajesM.mp3")
+        pygame.mixer.music.play(3)
+
+    
