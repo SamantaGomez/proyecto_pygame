@@ -432,3 +432,6 @@ def comenzar_nuevo_juego(): #funcion para que comienza nuevamente el juego desde
         pygame.init()
         main(False)
     return 0
+def puntajes(): #opcion del boton puntajes 
+    print(" Función que muestra otro menú de opciones.")
+    ganador(0)
