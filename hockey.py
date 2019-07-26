@@ -20,9 +20,8 @@ class Disco(pygame.sprite.Sprite):
     def mover(self, time, jugador1,jugador2,puntos): #definimos parametros, de las variables involucradas
         self.rect.centerx += self.speed[0] * time #arrancamos el juego 
         self.rect.centery += self.speed[1] * time
-
-        #condicionamos y damos un contador de puntos, cuando el disco marque gol, en los extremos de el tablero
-        if self.rect.left <= 0:
+       
+        if self.rect.left <= 0:#condicionamos y damos un contador de puntos, cuando el disco marque gol, en los extremos de el tablero
             puntos[1] += 1
         if self.rect.right >= WIDTH:
             puntos[0] += 1
@@ -41,8 +40,7 @@ class Disco(pygame.sprite.Sprite):
 
         return puntos
 
-#creamos la clase mango1 que va a ser para el primer jugador
-class Mangos(pygame.sprite.Sprite):
+class Mangos(pygame.sprite.Sprite):#creamos la clase mango1 que va a ser para el primer jugador
     def __init__(self, x):
         pygame.sprite.Sprite.__init__(self)
         self.image = load_image("mango1.png", True) #mandamos a llamar a la imagen de mango
@@ -87,25 +85,23 @@ class Mangos(pygame.sprite.Sprite):
                 if self.rect.bottom <= WIDTH:
                     if keys[K_LEFT]:     #tecla hacia la izquierda
                         self.rect.centerx -= self.speed * time
-# ---------------------------------------------------------------------
-# Funciones en general
-# ---------------------------------------------------------------------
-def ganador(goles):
+
+def ganador(goles):# Funciones en general
 
     class Inicio ():
-        """def __init__(self, ):
+        def __init__(self, ):
             self.lineas = 0
             self.caracteres = ['', ]
             self.fuente = pygame.font.Font(None, 25)
 
             self.distancia = 20
             self.posX = 50
-            self.posY = 50"""
+            self.posY = 50
         def Final(self, evento):#defino la funcion para guardar y moestrar el puntaje de quienes jugaron 
             if goles == 0:
                 registro()#indico que si no exiten goles se vaya a la funcion registro, donde me indicara directamente la imagen 
-                          #final donde muestra el total de los puntajes y Fin de juego 
-            for accion in evento:
+                         #final donde muestra el total de los puntajes y Fin de juego 
+            for accion in evento: 
                 if accion.type == KEYDOWN:
                     if accion.key == K_RETURN:
                         self.caracteres.append('')
@@ -138,14 +134,12 @@ def ganador(goles):
 		def creartxt(self, ):
             archi = open('datos.txt', 'w')
             archi.close()	
-		
-		#Se crea una funcion para leer los datos 
-		def leertxt(self, superficie):
+				
+		def leertxt(self, superficie):#Se crea una funcion para leer los datos 
             archi = open('datos.txt', 'r')
             linea = archi.readline()
             valorY = 0
-            while linea != "":
-                # print(linea)
+            while linea != "": # print(linea)              
                 linea = archi.readline()
                 lista = self.fuente.render(str(linea), 0, ( 17, 17, 20))
                 valorY = valorY + 65
@@ -156,14 +150,11 @@ def ganador(goles):
         archi = open('datos.txt', 'a')
         archi.write(dato + "\n")
         archi.close()
-		
-	
-	#CREAMOS UNA FUNCION REGISTRO PARA REGISTRAR LOS PUNTAJES DE LOS JUGADORES
-	def registro():
+				
+	def registro():#CREAMOS UNA FUNCION REGISTRO PARA REGISTRAR LOS PUNTAJES DE LOS JUGADORES
         pygame.mixer.music.stop() 
         if __name__ == '__main__':
             salir = False
-
             pygame.init()
             pygame.font.init()
             screen = pygame.display.set_mode((894, 550))
@@ -181,19 +172,19 @@ def ganador(goles):
                 for action in eventos:
                     """if action.key == K_ESCAPE:
                         sys.exit()"""
-                    if action.type == pygame.MOUSEBUTTONDOWN:
+                    if action.type == pygame.MOUSEBUTTONDOWN:					
                         menu_inicio()
-				
+						
 				ingresoTXT.leertxt(screen)
                 pygame.display.flip()
                 pygame.time.delay(400)
             pygame.display.flip()
+			
 	 def puntos(): #Aqui registramos los puntos de cada jugador 
         print("tiene puntos") 
         if __name__ == '__main__':
 
             salir = False
-
             pygame.font.init()
             screen = pygame.display.set_mode((894, 550)) #medidas de la ventana final donde muestra puntajes
             pygame.display.set_caption("******REGISTRO DE PUNTAJES******")
@@ -345,12 +336,12 @@ def main(decicion):
 
             pygame.display.flip()
         return 0
+		
 def puntos():#funcion donde me idnica el final del puntaje y a cuantos puntos llego cada uno 
     print("Llego a puntos")
     if __name__ == '__main__':
 
         salir = False
-
         pygame.font.init()#inicializa
         screen = pygame.display.set_mode((894, 550))
         pygame.display.set_caption("******Puntajes******")#idico los puntajes, muestroo mensaje en tablero inicial
@@ -363,7 +354,6 @@ def puntos():#funcion donde me idnica el final del puntaje y a cuantos puntos ll
         pygame.mixer.music.play(3)
 
 		while not salir:
-
             for e in pygame.event.get():
                 if e.type == QUIT:
                     salir = True
@@ -448,27 +438,22 @@ def menu_inicio():
             ("Puntajes", puntajes),			#mando a llamar a puntajes 
             ("Salir", salir_del_programa)	#mando a llamar a salir
         ]
-
         pygame.font.init()					#inicializo nuevamente el menu principal-inicio
         screen = pygame.display.set_mode((620, 390))
         pygame.display.set_caption("******Hockey de mesa******")
         fondo = pygame.image.load("inicio.png").convert()#mando a llamar imagen principal de menu
-        menu = Menu(opciones)
-        
+        menu = Menu(opciones) 
         pygame.init()#nuevamente inicio el sonido en el menu
         sonMenu = pygame.mixer.music.load("menu.mp3")
         pygame.mixer.music.play(6)#inicializo la musica 
 
         while not salir:#mientras no salga que me muestre el menu principal
-
             for e in pygame.event.get():
                 if e.type == QUIT:
                     salir = True#si selecciona salir que se termien el juego
-
             screen.blit(fondo, (0, 0)) #mando a llamar a las funciones principales para imprimir los puntajes y datos del jugador
             menu.actualizar()
             menu.imprimir(screen)
-
             pygame.display.flip()
             pygame.time.delay(10)
 menu_inicio() #mando a llamar funcion menu inicio 
