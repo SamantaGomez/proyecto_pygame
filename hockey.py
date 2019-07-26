@@ -425,3 +425,10 @@ class Menu:
             posicion = (x, y + altura_de_opcion * indice)
             indice += 1
             screen.blit(imagen, posicion)
+def comenzar_nuevo_juego(): #funcion para que comienza nuevamente el juego desde cero
+    print(" Función que muestra un nuevo juego.")
+    pygame.mixer.music.stop()
+    if __name__ == '__main__':
+        pygame.init()
+        main(False)
+    return 0
