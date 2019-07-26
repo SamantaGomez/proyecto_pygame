@@ -239,3 +239,10 @@ def texto(texto, posx, posy, color=(255, 255, 255)): #llamar a la funcion texto 
     salida_rect.centerx = posx
     salida_rect.centery = posy
     return salida, salida_rect
+	
+def sonido(): #sonido de fondo en la pantalla principal
+    pygame.init()
+    sonGolpe = pygame.mixer.music.load("musica.mp3")
+    pygame.mixer.music.play(3)
+    print("Melodia")
+    pygame.mixer.Sound.stop()
