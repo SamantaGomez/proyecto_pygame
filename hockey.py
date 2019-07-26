@@ -188,4 +188,46 @@ def ganador(goles):
                 pygame.display.flip()
                 pygame.time.delay(400)
             pygame.display.flip()
+	 def puntos(): #Aqui registramos los puntos de cada jugador 
+        print("tiene puntos") 
+        if __name__ == '__main__':
 
+            salir = False
+
+            pygame.font.init()
+            screen = pygame.display.set_mode((894, 550)) #medidas de la ventana final donde muestra puntajes
+            pygame.display.set_caption("******REGISTRO DE PUNTAJES******")
+            estiloLetra = pygame.font.SysFont("Arial 93", 35)
+            fondo = pygame.image.load("puntajes.png").convert() #mandamos a llamar a el tablero
+            
+            pygame.init()#inicializamos el menu mandando a llamar el sonido
+            sonMenu = pygame.mixer.music.load("menu.mp3")
+            pygame.mixer.music.play(1)#determinamos instancia para volver a repetir
+
+            ingresoTXT = Inicio()
+            while not salir:
+                eventos = pygame.event.get()#mientras no salga seguimos detectando los eventos
+
+                screen.blit(fondo, (0, 0))#fondo por default sin medidas 
+
+                mensaje = estiloLetra.render(("REGISTRO DE PUNTAJES"), 0, (206, 30, 4))
+                screen.blit(mensaje, (310, 0))
+                ingresoTXT.Final(eventos)
+                ingresoTXT.mensaje(screen)#mando a llamar a las funciones que me permiten ingresar el nombre del jugador
+                ingresoTXT.leertxt(screen)
+                pygame.display.flip()
+                pygame.time.delay(400)#tiempo para retrasar al final de la ventana, loq ue me demoro para que salga el jugador 
+            pygame.display.flip()
+
+    puntos()
+
+def load_image(filename, transparent=False): #retengo las imagenes en el tablero
+    try:
+        image = pygame.image.load(filename)#doy limites en coordenadas 
+    except pygame.error as message:
+        raise
+    image = image.convert()
+    if transparent:
+        color = image.get_at((0, 0))
+        image.set_colorkey(color, RLEACCEL)
+    return image
