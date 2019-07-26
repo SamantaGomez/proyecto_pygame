@@ -376,3 +376,13 @@ def puntos():#funcion donde me idnica el final del puntaje y a cuantos puntos ll
             pygame.display.flip()
             pygame.time.delay(10)#tiempo que me retrasa en copilar 
         pygame.display.flip()
+		
+class Menu:
+    
+    def __init__(self, opciones): #Representa un menú con opciones para un juego
+
+        self.opciones = opciones
+        self.font = pygame.font.SysFont('Castellar', 30)
+        self.seleccionado = 0
+        self.total = len(self.opciones)
+        self.mantiene_pulsado = False
