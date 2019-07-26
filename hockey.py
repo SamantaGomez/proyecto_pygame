@@ -396,3 +396,12 @@ class Menu:
             elif k[K_DOWN]:
                 self.seleccionado += 1
             elif k[K_RETURN]:
+                titulo, funcion = self.opciones[self.seleccionado] # Invoca a la función asociada a la opción.
+                print("Selecciona la opción '%s'." % (titulo))
+                funcion()
+        if self.seleccionado < 0:# procura que el cursor esté entre las opciones permitidas
+            self.seleccionado = 0
+        elif self.seleccionado > self.total - 1:
+            self.seleccionado = self.total - 1
+ 
+        self.mantiene_pulsado = k[K_UP] or k[K_DOWN] or k[K_RETURN] # indica si el usuario mantiene pulsada alguna tecla.
