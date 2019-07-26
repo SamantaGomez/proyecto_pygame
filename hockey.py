@@ -386,3 +386,13 @@ class Menu:
         self.seleccionado = 0
         self.total = len(self.opciones)
         self.mantiene_pulsado = False
+	
+    def actualizar(self):
+        k = pygame.key.get_pressed()#Altera el valor de 'self.seleccionado' con los direccionales.
+
+        if not self.mantiene_pulsado:
+            if k[K_UP]:
+                self.seleccionado -= 1
+            elif k[K_DOWN]:
+                self.seleccionado += 1
+            elif k[K_RETURN]:
