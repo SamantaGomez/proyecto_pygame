@@ -183,4 +183,9 @@ def ganador(goles):
                         sys.exit()"""
                     if action.type == pygame.MOUSEBUTTONDOWN:
                         menu_inicio()
+				
+				ingresoTXT.leertxt(screen)
+                pygame.display.flip()
+                pygame.time.delay(400)
+            pygame.display.flip()
 
