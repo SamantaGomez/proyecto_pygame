@@ -246,3 +246,28 @@ def sonido(): #sonido de fondo en la pantalla principal
     pygame.mixer.music.play(3)
     print("Melodia")
     pygame.mixer.Sound.stop()
+
+#FUNCION MAIN  LAS DESCIONES PARA EL PROGRAMA
+def main(decicion):
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption("Hockey de mesa")
+
+    background_image = load_image('CanchaMesa.jpg')  #CARGAMOS LAS IMAGENES
+    background_image1 = load_image('fondo_pong.png') # CARGAMOS LAS IMAGENES
+    puck = Puck()
+
+
+    jugador1 = Jugador(30) #ESTAMOS DANDO EL TAMAÑO D ELOS MANGOS
+    jugador2 = Jugador(WIDTH -30) #ESTAMOS DANDO EL TAMAÑO D ELOS MANGOS
+
+    clock = pygame.time.Clock()
+
+    auxTime=0
+    estiloLetra = pygame.font.SysFont("Arial black", 30)
+
+    puntos = [0, 0]
+    decicion=True
+
+    colorPuntos=(169, 62, 17)
+    colorTiempo=(29, 133, 28)
+    
