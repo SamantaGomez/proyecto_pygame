@@ -405,3 +405,23 @@ class Menu:
             self.seleccionado = self.total - 1
  
         self.mantiene_pulsado = k[K_UP] or k[K_DOWN] or k[K_RETURN] # indica si el usuario mantiene pulsada alguna tecla.
+
+    def imprimir(self, screen):#Imprime sobre 'screen' el texto de cada opción del menú
+        total = self.total
+        indice = 0
+        altura_de_opcion = 55
+        x = 250
+        y = 105
+
+        for (titulo, funcion) in self.opciones:
+            if indice == self.seleccionado:
+                # color seleccionado
+                color = (46, 144, 32)
+            else:
+                # color del menu
+                color = (23, 62, 196)
+
+            imagen = self.font.render(titulo, 1, color)
+            posicion = (x, y + altura_de_opcion * indice)
+            indice += 1
+            screen.blit(imagen, posicion)
