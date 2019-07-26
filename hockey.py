@@ -271,3 +271,25 @@ def main(decicion):
     colorPuntos=(169, 62, 17)
     colorTiempo=(29, 133, 28)
     
+	#CREAMOS UN IF PARA LA DESCION DEL TIEMPO
+    if decicion==True:
+        auxTime=auxTime*auxTime
+        print("se reseteo tiempo actual "+str(auxTime))
+        contP1 = 0
+        contP2=0
+        tiempoMaximo=25
+        while decicion:
+            time = clock.tick(60)
+            keys = pygame.key.get_pressed()
+            tiempo = pygame.time.get_ticks() / 1000  # para el reloj
+            if auxTime<= tiempo:
+                print (str(auxTime)+" Segundos")
+                auxTime+=1
+                tiempoMaximo -=1
+            for eventos in pygame.event.get():
+                if eventos.type == QUIT:
+                    sys.exit(0)
+
+            puntos = puck.mover( time, jugador1,jugador2,puntos)
+            jugador1.mover(time, keys)
+            jugador2.ia(time,puck,keys)
