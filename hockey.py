@@ -151,5 +151,9 @@ def ganador(goles):
                 valorY = valorY + 65
                 superficie.blit(lista, (40, valorY))
             archi.close()
-
+	
+	def grabartxt(dato): #creareamos una funcion para grabar nuestros datos
+        archi = open('datos.txt', 'a')
+        archi.write(dato + "\n")
+        archi.close()
 
