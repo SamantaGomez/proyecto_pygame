@@ -231,3 +231,11 @@ def load_image(filename, transparent=False): #retengo las imagenes en el tablero
         color = image.get_at((0, 0))
         image.set_colorkey(color, RLEACCEL)
     return image
+
+def texto(texto, posx, posy, color=(255, 255, 255)): #llamar a la funcion texto en recursividad
+    fuente = pygame.font.Font(None, 50)
+    salida = pygame.font.Font.render(fuente, texto, 1, color)
+    salida_rect = salida.get_rect()
+    salida_rect.centerx = posx
+    salida_rect.centery = posy
+    return salida, salida_rect
