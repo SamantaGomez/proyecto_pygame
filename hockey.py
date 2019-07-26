@@ -362,4 +362,17 @@ def puntos():#funcion donde me idnica el final del puntaje y a cuantos puntos ll
         sonMenu = pygame.mixer.music.load("PuntajesM.mp3")
         pygame.mixer.music.play(3)
 
-    
+		while not salir:
+
+            for e in pygame.event.get():
+                if e.type == QUIT:
+                    salir = True
+                    sys.exit(0)
+
+            screen.blit(fondo, (0, 0))
+
+            mensaje = estiloLetra.render(("***********Puntuaciones*********"), 0, (206, 45, 225))#me permite ver entrando a al funcion 
+            screen.blit(mensaje, (310, 0))                  #de puntaje, los puntajes decada juagdor haciendo un contador
+            pygame.display.flip()
+            pygame.time.delay(10)#tiempo que me retrasa en copilar 
+        pygame.display.flip()
