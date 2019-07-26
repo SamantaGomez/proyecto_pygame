@@ -435,3 +435,7 @@ def comenzar_nuevo_juego(): #funcion para que comienza nuevamente el juego desde
 def puntajes(): #opcion del boton puntajes 
     print(" Función que muestra otro menú de opciones.")
     ganador(0)
+def salir_del_programa():
+    import sys#la importacion de esta libreria sys, nos permite salir del programa x eso la mandamos a llamar
+    print(" Gracias por utilizar este programa.")
+    sys.exit(0)
