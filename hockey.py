@@ -439,3 +439,36 @@ def salir_del_programa():
     import sys#la importacion de esta libreria sys, nos permite salir del programa x eso la mandamos a llamar
     print(" Gracias por utilizar este programa.")
     sys.exit(0)
+def menu_inicio():
+    if __name__ == '__main__':
+
+        salir = False  #es otro main , pero el principal
+        opciones = [
+            ("Jugar", comenzar_nuevo_juego),#mando a llamar a la funcion de nuevo juego 
+            ("Puntajes", puntajes),			#mando a llamar a puntajes 
+            ("Salir", salir_del_programa)	#mando a llamar a salir
+        ]
+
+        pygame.font.init()					#inicializo nuevamente el menu principal-inicio
+        screen = pygame.display.set_mode((620, 390))
+        pygame.display.set_caption("******Hockey de mesa******")
+        fondo = pygame.image.load("inicio.png").convert()#mando a llamar imagen principal de menu
+        menu = Menu(opciones)
+        
+        pygame.init()#nuevamente inicio el sonido en el menu
+        sonMenu = pygame.mixer.music.load("menu.mp3")
+        pygame.mixer.music.play(6)#inicializo la musica 
+
+        while not salir:#mientras no salga que me muestre el menu principal
+
+            for e in pygame.event.get():
+                if e.type == QUIT:
+                    salir = True#si selecciona salir que se termien el juego
+
+            screen.blit(fondo, (0, 0)) #mando a llamar a las funciones principales para imprimir los puntajes y datos del jugador
+            menu.actualizar()
+            menu.imprimir(screen)
+
+            pygame.display.flip()
+            pygame.time.delay(10)
+menu_inicio() #mando a llamar funcion menu inicio 
