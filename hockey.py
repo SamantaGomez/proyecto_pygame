@@ -1,45 +1,27 @@
-# Librerias e importaciones
+# Módulos
 import sys, pygame
 from pygame.locals import *
+# Medidas de la ventana principal
+WIDTH = 1145
+HEIGHT = 600
 
-# medidas de la ventana
-WIDTH = 1165
-HEIGHT = 800
-# creacion del proyecto por clases
-#clase de puck
-class Puck(pygame.sprite.Sprite):
+# Clases
+# ---------------------------------------------------------------------
+# CLASE QUE CREA DISCO
+class Disco(pygame.sprite.Sprite):
     def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = load_image("/*imagen*/", True)
-        self.rect = self.image.get_rect()
-        self.rect.centerx = WIDTH / 2
-        self.rect.centery = HEIGHT / 2
-        self.speed = [0.4, -0.4]
-# Librerias e importaciones
-import sys, pygame
-from pygame.locals import *
-
-# medidas de la ventana
-WIDTH = 1165
-HEIGHT = 800
-
-# creacion del proyecto por clases
-
-#clase  para la creacion del DISCO
-class DISCO(pygame.sprite.Sprite):
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
+        pygame.sprite.Sprite.__init__(self) #madnamos a llamar la imagen, o el atributo Disco dentro de la clase Disco
         self.image = load_image("DISCO.png", True)
         self.rect = self.image.get_rect()
-        self.rect.centerx = WIDTH / 2
+        self.rect.centerx = WIDTH / 2  #Medidas del disco y ubicacion en la ventana
         self.rect.centery = HEIGHT / 2
-        self.speed = [0.4, -0.4]
+        self.speed = [0.8, -0.8]
 
-#creacion de funcion mover, dentro del la clase DISCO
-     def MoverDisco(self, time, player1,player2,puntaje):
-        self.rect.centerx += self.speed[0] * time
+    def mover(self, time, jugador1,jugador2,puntos): #definimos parametros, de las variables involucradas
+        self.rect.centerx += self.speed[0] * time #arrancamos el juego 
         self.rect.centery += self.speed[1] * time
 
+        #condicionamos y damos un contador de puntos, cuando el disco marque gol, en los extremos de el tablero
         if self.rect.left <= 0:
             puntos[1] += 1
         if self.rect.right >= WIDTH:
@@ -50,84 +32,100 @@ class DISCO(pygame.sprite.Sprite):
         if self.rect.top <= 0 or self.rect.bottom >= HEIGHT:
             self.speed[1] = -self.speed[1]
             self.rect.centery += self.speed[1] * time
-        if pygame.sprite.collide_rect(self, player1):
+        if pygame.sprite.collide_rect(self, jugador1):
             self.speed[0] = -self.speed[0]
             self.rect.centerx += self.speed[0] * time
-        if pygame.sprite.collide_rect(self, player2):
+        if pygame.sprite.collide_rect(self, jugador2):
             self.speed[0] = -self.speed[0]
             self.rect.centerx += self.speed[0] * time
 
-        return puntaje
-		
-class Mango(pygame.sprite.Sprite):
+        return puntos
+
+#creamos la clase mango1 que va a ser para el primer jugador
+class Mangos(pygame.sprite.Sprite):
     def __init__(self, x):
         pygame.sprite.Sprite.__init__(self)
-        self.image = load_image("mango1.png", True)
+        self.image = load_image("mango1.png", True) #mandamos a llamar a la imagen de mango
         self.rect = self.image.get_rect()
         self.rect.centerx = x
-        self.rect.centery = HEIGHT / 2
-        self.speed = 0.9		
-		
-#creacion de la funcion MoverMango		
-	 def MoverMango(self, time, keys):
+        self.rect.centery = HEIGHT / 2  #el mango uno se presente en la mitad del lado izquierdo
+        self.speed = 0.5 #segundos que se demora el mango en movimiento
+
+    def movermango1(self, time, keys):#definimos una funcion para el movimiento del mango1 con las teclas W,S,A,D
         if self.rect.top >= 0:
-            if keys[K_w]:
-                self.rect.centery -= self.speed * time
+            if keys[K_w]:       #tecla hacia arriba
+                self.rect.centery -= self.speed * time #declaramos time para que vaya corriendo y marque el tiempo de acuerdo al movimiento
         if self.rect.bottom <= HEIGHT:
-            if keys[K_s]:
+            if keys[K_s]:       #tecla hacia abajo
                 self.rect.centery += self.speed * time
+
         if self.rect.centerx<=HEIGHT:
             if self.rect.bottom <= HEIGHT:
-                if keys[K_d]:
+                if keys[K_d]:   #tecla hacia la derecha
                     self.rect.centerx += self.speed * time
+
         if self.rect.centerx >= 15:
             if self.rect.bottom <= HEIGHT:
-                if keys[K_a]:
+                if keys[K_a]:   #tecla hacia la izquierda
                     self.rect.centerx -= self.speed * time
-					
-					
-#funcion ganador indico la sintaxis y en donde va a estar tanto en X como en Y
 
+    def movermango2(self, time, puck_2, keys):#definimos una funcion para el movimiento del mango2 con lsa flechas del key
+
+            if self.rect.top >= 0:
+                if keys[K_UP]:          #tecla hacia arriba
+                    self.rect.centery -= self.speed * time
+            if self.rect.bottom <= HEIGHT:
+                if keys[K_DOWN]:        ##tecla hacia abajo
+                    self.rect.centery += self.speed * time
+
+            if self.rect.centerx < WIDTH:
+                if self.rect.bottom <= WIDTH:
+                    if keys[K_RIGHT]:   #tecla hacia la derecha
+                        self.rect.centerx += self.speed * time
+
+            if self.rect.centerx >= WIDTH/2:
+                if self.rect.bottom <= WIDTH:
+                    if keys[K_LEFT]:     #tecla hacia la izquierda
+                        self.rect.centerx -= self.speed * time
+# ---------------------------------------------------------------------
+# Funciones en general
+# ---------------------------------------------------------------------
 def ganador(goles):
 
-    class Inicio():
-        def __init__(self, ):
+    class Inicio ():
+        """def __init__(self, ):
             self.lineas = 0
             self.caracteres = ['', ]
             self.fuente = pygame.font.Font(None, 25)
 
             self.distancia = 20
             self.posX = 50
-            self.posY = 50
-			
-		def teclado(self, evento):
-		
-			if goles == 0:
-				registro()
-				
-			#else:
-			#	print ("hola")
-			for accion in evento:
-				if accion.type == KEYDOWN:
-					if accion.key == K_RETURN:
-						self.caracteres.append('')
-						print("Guardado")
-						marcador = goles
-						dato = "Player: " + str(self.caracteres)+ "Puntaje: " +str(marcador)
-						grabartxt()
-						registro()
-						
-					elif accion.key == K_ESCAPE:
-						print("SALIO DEL JUEGO")
-						sys.exit()
-					elif accion.key == K_BACKSPACE:
-						if self.caracteres[self.lineas] == '' and self.lineas>0:
-							self.caracteres = self.caracteres[0:-1]
-						else:
-							self.caracteres[self.lineas]= self.caracteres[self.lineas][0:-1]
-							
-					else:
-						self.caracteres[self.lineas]= str(self.caracteres[self.lineas] +accion.unicode)
+            self.posY = 50"""
+        def Final(self, evento):#defino la funcion para guardar y moestrar el puntaje de quienes jugaron 
+            if goles == 0:
+                registro()#indico que si no exiten goles se vaya a la funcion registro, donde me indicara directamente la imagen 
+                          #final donde muestra el total de los puntajes y Fin de juego 
+            for accion in evento:
+                if accion.type == KEYDOWN:
+                    if accion.key == K_RETURN:
+                        self.caracteres.append('')
+                        print("Guardado")
+                        marcador = goles
+                        dato = "Jugador: " + str(self.caracteres) + " Puntos: " + str(marcador)
+                        grabartxt(dato)
+                        registro() #si jugó la partida, cuando se acabe el tiempo, 
+                                   #al final del juego indicará el puntaje de cada jugador y muestra GAME OVER
+                    elif accion.key == K_ESCAPE:#ESC para salir
+                        print("Game Over")
+                        sys.exit()
+                    elif accion.key == K_BACKSPACE:
+                        if self.caracteres[self.lineas] == '' and self.lineas > 0:
+                            self.caracteres = self.caracteres[0:-1]
+                        else:
+                            self.caracteres[self.lineas] = self.caracteres[self.lineas][0:-1]
+
+                    else:
+                        self.caracteres[self.lineas] = str(self.caracteres[self.lineas] + accion.unicode)
 		def peticion(self, superficie):
             for self.lineas in range(len(self.caracteres)):
                 Img_letra = self.fuente.render(self.caracteres[self.lineas], True, (43, 233, 17))
