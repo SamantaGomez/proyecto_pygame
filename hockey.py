@@ -293,3 +293,26 @@ def main(decicion):
             puntos = puck.mover( time, jugador1,jugador2,puntos)
             jugador1.mover(time, keys)
             jugador2.ia(time,puck,keys)
+			
+			#NOS MUESTRA EL JUGADOR Y LOS PUNTOS QUE SE REALIZA AL MOMENTO DE QUE EL DISCO ENTRE EN LA ZONA DE ANOTACION 
+
+            p_jug, p_jug_rect = texto("Jugador A "+str(puntos[0]), WIDTH / 4, 40,colorPuntos)
+            p_cpu, p_cpu_rect = texto("Jugador B "+str(puntos[1]), WIDTH - WIDTH / 4, 40,colorPuntos)
+            screen.blit(background_image, (0, 0))
+            screen.blit(background_image1, (255, 70))
+            screen.blit(p_jug, p_jug_rect)
+            screen.blit(p_cpu, p_cpu_rect)
+            screen.blit(puck.image, puck.rect)
+            screen.blit(jugador1.image, jugador2.rect)
+            screen.blit(jugador2.image, jugador1.rect)
+            if puntos[0]==contP1+1:
+                pygame.init()
+                sonGolpe = pygame.mixer.music.load("golpe.mp3")
+                pygame.mixer.music.play(1)
+                contP1= contP1+1
+
+            if puntos[1]==contP2+1:
+                pygame.init()
+                sonGolpe = pygame.mixer.music.load("golpe.mp3")
+                pygame.mixer.music.play(1)
+                contP2= contP2+1
