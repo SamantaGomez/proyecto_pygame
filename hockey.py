@@ -4,9 +4,6 @@ from pygame.locals import *
 # Medidas de la ventana principal
 WIDTH = 1145
 HEIGHT = 600
-
-# Clases
-# ---------------------------------------------------------------------
 # CLASE QUE CREA DISCO
 class Disco(pygame.sprite.Sprite):
     def __init__(self):
@@ -20,8 +17,9 @@ class Disco(pygame.sprite.Sprite):
     def mover(self, time, jugador1,jugador2,puntos): #definimos parametros, de las variables involucradas
         self.rect.centerx += self.speed[0] * time #arrancamos el juego 
         self.rect.centery += self.speed[1] * time
-       
-        if self.rect.left <= 0:#condicionamos y damos un contador de puntos, cuando el disco marque gol, en los extremos de el tablero
+
+        #condicionamos y damos un contador de puntos, cuando el disco marque gol, en los extremos de el tablero
+        if self.rect.left <= 0:
             puntos[1] += 1
         if self.rect.right >= WIDTH:
             puntos[0] += 1
@@ -40,7 +38,8 @@ class Disco(pygame.sprite.Sprite):
 
         return puntos
 
-class Mangos(pygame.sprite.Sprite):#creamos la clase mango1 que va a ser para el primer jugador
+#creamos la clase mango1 que va a ser para el primer jugador
+class Mangos(pygame.sprite.Sprite):
     def __init__(self, x):
         pygame.sprite.Sprite.__init__(self)
         self.image = load_image("mango1.png", True) #mandamos a llamar a la imagen de mango
@@ -85,8 +84,8 @@ class Mangos(pygame.sprite.Sprite):#creamos la clase mango1 que va a ser para el
                 if self.rect.bottom <= WIDTH:
                     if keys[K_LEFT]:     #tecla hacia la izquierda
                         self.rect.centerx -= self.speed * time
-
-def ganador(goles):# Funciones en general
+# Funciones en general
+def ganador(goles):
 
     class Inicio ():
         def __init__(self, ):
@@ -100,8 +99,8 @@ def ganador(goles):# Funciones en general
         def Final(self, evento):#defino la funcion para guardar y moestrar el puntaje de quienes jugaron 
             if goles == 0:
                 registro()#indico que si no exiten goles se vaya a la funcion registro, donde me indicara directamente la imagen 
-                         #final donde muestra el total de los puntajes y Fin de juego 
-            for accion in evento: 
+                          #final donde muestra el total de los puntajes y Fin de juego 
+            for accion in evento:
                 if accion.type == KEYDOWN:
                     if accion.key == K_RETURN:
                         self.caracteres.append('')
@@ -122,14 +121,15 @@ def ganador(goles):# Funciones en general
 
                     else:
                         self.caracteres[self.lineas] = str(self.caracteres[self.lineas] + accion.unicode)
-		def peticion(self, superficie):
+
+        def mensaje(self, superficie):#mensaje para que me deje ingresar el nombre del jugador que ocupo el mango
             for self.lineas in range(len(self.caracteres)):
                 Img_letra = self.fuente.render(self.caracteres[self.lineas], True, (43, 233, 17))
                 superficie.blit(Img_letra, (self.posX, self.posY + self.distancia * self.lineas))
-                peticion = self.fuente.render(("Ingrese su Apodo"), 0, (26, 45, 225))
-                superficie.blit(peticion, (10, 30))
-				
-			pygame.display.flip()
+                mensaje = self.fuente.render(("Ingrese su nombre"), 0, (26, 45, 225))
+                superficie.blit(mensaje, (10, 30))
+
+            pygame.display.flip()
 				
 		def creartxt(self, ):
             archi = open('datos.txt', 'w')
