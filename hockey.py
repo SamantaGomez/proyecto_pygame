@@ -334,23 +334,25 @@ def main(decision):
             pygame.display.flip()
         return 0
 		
-def puntos():#funcion donde me idnica el final del puntaje y a cuantos puntos llego cada uno 
-    print("Llego a puntos")
+def puntos():
+    print("Sus puntos son:")
     if __name__ == '__main__':
 
         salir = False
-        pygame.font.init()#inicializa
-        screen = pygame.display.set_mode((894, 550))
-        pygame.display.set_caption("******Puntajes******")#idico los puntajes, muestroo mensaje en tablero inicial
-        estiloLetra = pygame.font.SysFont("Castellar", 45)#defino letra y tamaño y tipo 
-        fondo = pygame.image.load("puntajes.png").convert()#mando a llamar a tablero inicial imagen inicial
-        menu = Menu(opciones)
-        # ----------inicio de sonido de menu
-        pygame.init()
-        sonMenu = pygame.mixer.music.load("PuntajesM.mp3")
-        pygame.mixer.music.play(3)
 
-		while not salir:
+        pygame.font.init()
+        screen = pygame.display.set_mode((800, 550))
+        pygame.display.set_caption("MARCADOR FIN DE JUEGO")
+        estiloLetra = pygame.font.SysFont("Broadway", 45)
+        fondo = pygame.image.load("medalla.png").convert()#se muestra la imagen al final del juego
+        menu = Menu(opciones)
+        # Musica de fondo para la impresion del marcador
+        pygame.init()
+        sonidoMenu = pygame.mixer.music.load("fin.mp3")
+        pygame.mixer.music.play(4)
+
+        while not salir:
+
             for e in pygame.event.get():
                 if e.type == QUIT:
                     salir = True
@@ -358,24 +360,28 @@ def puntos():#funcion donde me idnica el final del puntaje y a cuantos puntos ll
 
             screen.blit(fondo, (0, 0))
 
-            mensaje = estiloLetra.render(("***********Puntuaciones*********"), 0, (206, 45, 225))#me permite ver entrando a al funcion 
-            screen.blit(mensaje, (310, 0))                  #de puntaje, los puntajes decada juagdor haciendo un contador
+            mensaje = estiloLetra.render(("MARCADOR"), 0, (206, 45, 225))
+            screen.blit(mensaje, (310, 0))
             pygame.display.flip()
-            pygame.time.delay(10)#tiempo que me retrasa en copilar 
+            pygame.time.delay(10)
         pygame.display.flip()
-		
+
 class Menu:
-    
-    def __init__(self, opciones): #Representa un menú con opciones para un juego
+    "Representa un menú con opciones para un juego"
+
+
+    def __init__(self, opciones):
 
         self.opciones = opciones
-        self.font = pygame.font.SysFont('Castellar', 30)
+        self.font = pygame.font.SysFont('Snap ITC', 30) #ESTILO Y TAMAÑO DE LETRA DEL MENU DE INICIO
         self.seleccionado = 0
         self.total = len(self.opciones)
         self.mantiene_pulsado = False
-	
+
     def actualizar(self):
-        k = pygame.key.get_pressed()#Altera el valor de 'self.seleccionado' con los direccionales.
+        """Altera el valor de 'self.seleccionado' con los direccionales."""
+
+        k = pygame.key.get_pressed()
 
         if not self.mantiene_pulsado:
             if k[K_UP]:
@@ -383,22 +389,29 @@ class Menu:
             elif k[K_DOWN]:
                 self.seleccionado += 1
             elif k[K_RETURN]:
-                titulo, funcion = self.opciones[self.seleccionado] # Invoca a la función asociada a la opción.
+
+                # Invoca a la función asociada a la opción.
+                titulo, funcion = self.opciones[self.seleccionado]
                 print("Selecciona la opción '%s'." % (titulo))
                 funcion()
-        if self.seleccionado < 0:# procura que el cursor esté entre las opciones permitidas
+
+        # procura que el cursor esté entre las opciones permitidas
+        if self.seleccionado < 0:
             self.seleccionado = 0
         elif self.seleccionado > self.total - 1:
             self.seleccionado = self.total - 1
- 
-        self.mantiene_pulsado = k[K_UP] or k[K_DOWN] or k[K_RETURN] # indica si el usuario mantiene pulsada alguna tecla.
 
-    def imprimir(self, screen):#Imprime sobre 'screen' el texto de cada opción del menú
+        # indica si el usuario mantiene pulsada alguna tecla.
+        self.mantiene_pulsado = k[K_UP] or k[K_DOWN] or k[K_RETURN]
+
+    def imprimir(self, screen):
+        """Imprime sobre 'screen' el texto de cada opción del menú."""
+
         total = self.total
         indice = 0
         altura_de_opcion = 55
-        x = 250
-        y = 105
+        x = 450 #posicion del menu con cordenadas en el 4to cuadrante
+        y = 250
 
         for (titulo, funcion) in self.opciones:
             if indice == self.seleccionado:
@@ -412,45 +425,58 @@ class Menu:
             posicion = (x, y + altura_de_opcion * indice)
             indice += 1
             screen.blit(imagen, posicion)
-def comenzar_nuevo_juego(): #funcion para que comienza nuevamente el juego desde cero
-    print(" Función que muestra un nuevo juego.")
+
+#Funciones que se llaman en la pantalla principal como menu
+def comenzar_nuevo_juego():
+    print(" Jugar")
     pygame.mixer.music.stop()
     if __name__ == '__main__':
         pygame.init()
         main(False)
     return 0
-def puntajes(): #opcion del boton puntajes 
-    print(" Función que muestra otro menú de opciones.")
+
+
+def puntajes():
+    print(" Mostrar el marcador.")
     ganador(0)
+
+
 def salir_del_programa():
-    import sys#la importacion de esta libreria sys, nos permite salir del programa x eso la mandamos a llamar
-    print(" Gracias por utilizar este programa.")
+    import sys
+    print("Salir")
     sys.exit(0)
+
+
 def menu_inicio():
     if __name__ == '__main__':
 
-        salir = False  #es otro main , pero el principal
+        salir = False
         opciones = [
-            ("Jugar", comenzar_nuevo_juego),#mando a llamar a la funcion de nuevo juego 
-            ("Puntajes", puntajes),			#mando a llamar a puntajes 
-            ("Salir", salir_del_programa)	#mando a llamar a salir
+            ("Jugar", comenzar_nuevo_juego),
+            ("Marcador", puntajes),
+            ("Salir", salir_del_programa)
         ]
-        pygame.font.init()					#inicializo nuevamente el menu principal-inicio
-        screen = pygame.display.set_mode((620, 390))
-        pygame.display.set_caption("******Hockey de mesa******")
-        fondo = pygame.image.load("inicio.png").convert()#mando a llamar imagen principal de menu
-        menu = Menu(opciones) 
-        pygame.init()#nuevamente inicio el sonido en el menu
-        sonMenu = pygame.mixer.music.load("menu.mp3")
-        pygame.mixer.music.play(6)#inicializo la musica 
 
-        while not salir:#mientras no salga que me muestre el menu principal
+        pygame.font.init()
+        screen = pygame.display.set_mode((630, 405))
+        pygame.display.set_caption("HOCKEY DE MESA")
+        fondo = pygame.image.load("inicio.png").convert()
+        menu = Menu(opciones)
+        #llama al menu pricipal para iniciar el juego de fondo tendra una imagen 
+        pygame.init()
+        sonidoMenu = pygame.mixer.music.load("menu.mp3")
+        pygame.mixer.music.play(6)
+
+        while not salir:
+
             for e in pygame.event.get():
                 if e.type == QUIT:
-                    salir = True#si selecciona salir que se termien el juego
-            screen.blit(fondo, (0, 0)) #mando a llamar a las funciones principales para imprimir los puntajes y datos del jugador
+                    salir = True
+
+            screen.blit(fondo, (0, 0))
             menu.actualizar()
             menu.imprimir(screen)
+
             pygame.display.flip()
             pygame.time.delay(10)
-menu_inicio() #mando a llamar funcion menu inicio 
+menu_inicio()
