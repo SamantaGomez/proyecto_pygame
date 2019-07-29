@@ -454,6 +454,7 @@ def menu_inicio():
             ("Marcador", puntajes),
             ("Salir", salir_del_programa)
         ]
+        
 
         pygame.font.init()
         screen = pygame.display.set_mode((630, 405))
