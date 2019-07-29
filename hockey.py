@@ -132,92 +132,93 @@ def ganador(goles):
                 mensaje = self.fuente.render(("Ingrese su nombre"), 0, (26, 45, 225))
                 superficie.blit(mensaje, (10, 30))
 
-            pygame.display.flip()
-				
-		def creartxt(self, ):
-            archi = open('datos.txt', 'w')
-            archi.close()	
-				
-		def leertxt(self, superficie):#Se crea una funcion para leer los datos 
+            pygame.display.flip()				
+            #Aqui creamos el archivo con formato txt para almacenar los nombres de los jugadpores ganadores
+        def creartxt(self, ):
+            archi = open('datos.txt', 'w') #guardo los datos de los jugadores
+            archi.close()
+
+        def leertxt(self, superficie):
             archi = open('datos.txt', 'r')
             linea = archi.readline()
             valorY = 0
-            while linea != "": # print(linea)              
+            while linea != "":
                 linea = archi.readline()
                 lista = self.fuente.render(str(linea), 0, ( 17, 17, 20))
                 valorY = valorY + 65
                 superficie.blit(lista, (40, valorY))
             archi.close()
-	
-	def grabartxt(dato): #creareamos una funcion para grabar nuestros datos
-        archi = open('datos.txt', 'a')
+
+    def grabartxt(dato):
+        archi = open('datos.txt', 'a') #se guarda los datos de los jugadores 
         archi.write(dato + "\n")
         archi.close()
-				
-	def registro():#CREAMOS UNA FUNCION REGISTRO PARA REGISTRAR LOS PUNTAJES DE LOS JUGADORES
-        pygame.mixer.music.stop() 
+
+    def registro():
+        pygame.mixer.music.stop()
         if __name__ == '__main__':
             salir = False
+
             pygame.init()
             pygame.font.init()
-            screen = pygame.display.set_mode((894, 550))
-            pygame.display.set_caption("******Puntajes******")
-            estiloLetra = pygame.font.SysFont("Arial Black", 45)
-            fondo = pygame.image.load("puntages.jpg").convert()
-            sonMenu = pygame.mixer.music.load("puntagesM.mp3")
+            screen = pygame.display.set_mode((894, 550))  #muestro la tabla de puntajes al finalizar el juego acabar tiempo y demas 
+            pygame.display.set_caption("MARCADOR")
+            estiloLetra = pygame.font.SysFont("Broadway", 45)
+            fondo = pygame.image.load("final.png").convert()
+            sonidoMenu = pygame.mixer.music.load("fin.mp3")
             pygame.mixer.music.play(1)
-            ingresoTXT = Entrada()
+            ingresoTXT = Inicio()
             screen.blit(fondo, (0, 0))
             while not salir:
-                mensaje = estiloLetra.render(("PUNTAJES "), 0, (7, 32, 250))
+                mensaje = estiloLetra.render(("MARCADOR"), 0, (7, 32, 250))
                 screen.blit(mensaje, (310, 0))
                 eventos = pygame.event.get()
                 for action in eventos:
-                    """if action.key == K_ESCAPE:
-                        sys.exit()"""
-                    if action.type == pygame.MOUSEBUTTONDOWN:					
+                    if action.type == pygame.MOUSEBUTTONDOWN:
                         menu_inicio()
-						
-				ingresoTXT.leertxt(screen)
+
+                ingresoTXT.leertxt(screen)
                 pygame.display.flip()
                 pygame.time.delay(400)
             pygame.display.flip()
-			
-	 def puntos(): #Aqui registramos los puntos de cada jugador 
-        print("tiene puntos") 
+
+    def puntos(): #Aqui registraremos los puntos de cada jugador 
+        print("tiene puntos")
         if __name__ == '__main__':
 
             salir = False
+
             pygame.font.init()
-            screen = pygame.display.set_mode((894, 550)) #medidas de la ventana final donde muestra puntajes
-            pygame.display.set_caption("******REGISTRO DE PUNTAJES******")
-            estiloLetra = pygame.font.SysFont("Arial 93", 35)
-            fondo = pygame.image.load("puntajes.png").convert() #mandamos a llamar a el tablero
-            
-            pygame.init()#inicializamos el menu mandando a llamar el sonido
-            sonMenu = pygame.mixer.music.load("menu.mp3")
-            pygame.mixer.music.play(1)#determinamos instancia para volver a repetir
+            screen = pygame.display.set_mode((894, 550))
+            pygame.display.set_caption("MARCADOR")
+            estiloLetra = pygame.font.SysFont("Broadway", 35)
+            fondo = pygame.image.load("final.png").convert()
+
+            pygame.init()
+            sonidoMenu = pygame.mixer.music.load("menu.mp3")
+            pygame.mixer.music.play(1)
 
             ingresoTXT = Inicio()
             while not salir:
-                eventos = pygame.event.get()#mientras no salga seguimos detectando los eventos
+                eventos = pygame.event.get()
 
-                screen.blit(fondo, (0, 0))#fondo por default sin medidas 
+                screen.blit(fondo, (0, 0))
 
-                mensaje = estiloLetra.render(("REGISTRO DE PUNTAJES"), 0, (206, 30, 4))
+                mensaje = estiloLetra.render(("MARCADOR"), 0, (206, 30, 4))
                 screen.blit(mensaje, (310, 0))
                 ingresoTXT.Final(eventos)
-                ingresoTXT.mensaje(screen)#mando a llamar a las funciones que me permiten ingresar el nombre del jugador
+                ingresoTXT.mensaje(screen)
                 ingresoTXT.leertxt(screen)
+                # display.update()
                 pygame.display.flip()
-                pygame.time.delay(400)#tiempo para retrasar al final de la ventana, loq ue me demoro para que salga el jugador 
+                pygame.time.delay(400)
             pygame.display.flip()
 
     puntos()
 
-def load_image(filename, transparent=False): #retengo las imagenes en el tablero
+def load_image(filename, transparent=False): #Retencion de las imagenes dentro del tablero
     try:
-        image = pygame.image.load(filename)#doy limites en coordenadas 
+        image = pygame.image.load(filename)
     except pygame.error as message:
         raise
     image = image.convert()
@@ -226,55 +227,52 @@ def load_image(filename, transparent=False): #retengo las imagenes en el tablero
         image.set_colorkey(color, RLEACCEL)
     return image
 
-def texto(texto, posx, posy, color=(255, 255, 255)): #llamar a la funcion texto en recursividad
+def texto(texto, posx, posy, color=(255, 255, 255)):
     fuente = pygame.font.Font(None, 50)
     salida = pygame.font.Font.render(fuente, texto, 1, color)
     salida_rect = salida.get_rect()
     salida_rect.centerx = posx
     salida_rect.centery = posy
     return salida, salida_rect
-	
-def sonido(): #sonido de fondo en la pantalla principal
+
+#Sonido durante el juego
+def sonido():
     pygame.init()
-    sonGolpe = pygame.mixer.music.load("musica.mp3")
+    sonidocolision = pygame.mixer.music.load("musica.mp3")
     pygame.mixer.music.play(3)
     print("Melodia")
     pygame.mixer.Sound.stop()
 
-#FUNCION MAIN  LAS DESCIONES PARA EL PROGRAMA
-def main(decicion):
+def main(decision):
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("Hockey de mesa")
+    pygame.display.set_caption("Hockey de Mesa")
 
-    background_image = load_image('CanchaMesa.jpg')  #CARGAMOS LAS IMAGENES
-    background_image1 = load_image('fondo_pong.png') # CARGAMOS LAS IMAGENES
-    puck = Puck()
+    background_image = load_image('tablero.png')
+    puck = Disco()
 
-
-    jugador1 = Jugador(30) #ESTAMOS DANDO EL TAMAÑO D ELOS MANGOS
-    jugador2 = Jugador(WIDTH -30) #ESTAMOS DANDO EL TAMAÑO D ELOS MANGOS
+    #Posicion inciial de los mangos
+    jugador1 = Mangos(30)
+    jugador2 = Mangos(WIDTH -30)
 
     clock = pygame.time.Clock()
 
-    auxTime=0
-    estiloLetra = pygame.font.SysFont("Arial black", 30)
+    auxTime=0  #Tiempo del juego
+    estiloLetra = pygame.font.SysFont("Broadway", 30)
 
     puntos = [0, 0]
     decicion=True
 
     colorPuntos=(169, 62, 17)
     colorTiempo=(29, 133, 28)
-    
-	#CREAMOS UN IF PARA LA DESCION DEL TIEMPO
     if decicion==True:
         auxTime=auxTime*auxTime
-        print("se reseteo tiempo actual "+str(auxTime))
-        contP1 = 0
+        print("Se inicializa tiempo "+str(auxTime))
+        contP1 = 0              
         contP2=0
-        tiempoMaximo=25
+        tiempoMaximo=25     #Hacemos un contador regresivo para el tiempo de juego con un maximo de 25 segundos de duracion
         while decicion:
             time = clock.tick(60)
-            keys = pygame.key.get_pressed()
+            keys = pygame.key.get_pressed() #para que vaya acorde al movimiento el tiempo vaya corriendo, contador
             tiempo = pygame.time.get_ticks() / 1000  # para el reloj
             if auxTime<= tiempo:
                 print (str(auxTime)+" Segundos")
@@ -285,15 +283,12 @@ def main(decicion):
                     sys.exit(0)
 
             puntos = puck.mover( time, jugador1,jugador2,puntos)
-            jugador1.mover(time, keys)
-            jugador2.ia(time,puck,keys)
-			
-			#NOS MUESTRA EL JUGADOR Y LOS PUNTOS QUE SE REALIZA AL MOMENTO DE QUE EL DISCO ENTRE EN LA ZONA DE ANOTACION 
+            jugador1.movermango1(time, keys)
+            jugador2.movermango2(time,puck,keys)
 
-            p_jug, p_jug_rect = texto("Jugador A "+str(puntos[0]), WIDTH / 4, 40,colorPuntos)
-            p_cpu, p_cpu_rect = texto("Jugador B "+str(puntos[1]), WIDTH - WIDTH / 4, 40,colorPuntos)
+            p_jug, p_jug_rect = texto("Jugador 1 "+str(puntos[0]), WIDTH / 4, 40,colorPuntos)
+            p_cpu, p_cpu_rect = texto("Jugador 2 "+str(puntos[1]), WIDTH - WIDTH / 4, 40,colorPuntos)
             screen.blit(background_image, (0, 0))
-            screen.blit(background_image1, (255, 70))
             screen.blit(p_jug, p_jug_rect)
             screen.blit(p_cpu, p_cpu_rect)
             screen.blit(puck.image, puck.rect)
@@ -301,41 +296,40 @@ def main(decicion):
             screen.blit(jugador2.image, jugador1.rect)
             if puntos[0]==contP1+1:
                 pygame.init()
-                sonGolpe = pygame.mixer.music.load("golpe.mp3")
-                pygame.mixer.music.play(1)
+                sonidocolision = pygame.mixer.music.load("musica.mp3")#aqui se repite la cancion durante el juego con tiempos cortos de 6 segundos
+                pygame.mixer.music.play(6)
                 contP1= contP1+1
 
             if puntos[1]==contP2+1:
                 pygame.init()
-                sonGolpe = pygame.mixer.music.load("golpe.mp3")
-                pygame.mixer.music.play(1)
+                sonidocolision = pygame.mixer.music.load("musica.mp3")#se vuelve a repetir la cancion si hace el punto
+                pygame.mixer.music.play(6)
                 contP2= contP2+1
-				
-			#NOS MUESTRA EL TIEMPO QUE TENEMOS PARA JUGAR     
+
             mensajeReloj = estiloLetra.render("Tiempo :" + str(tiempoMaximo), 0,colorTiempo)  # mensaje de reloj en pantalla
             screen.blit(mensajeReloj, (465, 0))  # aparicion de reloj en pantalla
             if int(tiempoMaximo) == 0:
                 score=0
                 print("Cumple la condicion de tiempo")
                 if puntos[0] > puntos[1]:
-                    print("Ganador jugador 1 !!!!!!!!!!!!!!!!!!!!!")
+                    print("Ganador jugador 1")
                     pygame.time.wait(4000)
                     score=auxTime*puntos[0]
                     print("Puntage total de jugador 1: "+str(score))
-                    ganadore(score)
+                    ganador(score)
                     # irREgistro()
                     # sys.exit(0)
                 elif puntos[0] < puntos[1]:
-                    print("Ganador jugador 2 !!!!!!!!!!!!!!!!!!!!!")
+                    print("Ganador jugador 2")
                     pygame.time.wait(4000)
                     score=auxTime*puntos[1]
                     print("Puntage total de jugador 2: "+str(score))
-                    ganadore(score)
+                    ganador(score)
                 else:
-                    print("Juego empatado")
+                    print("Juego empatado")#puntajes y condicional si existe un empate
                     print("Puntage total de jugador 1: "+str(puntos[0]))
                     print("Puntage total de jugador 1: " + str(puntos[1]))
-                    puntajes()
+                    puntos()
 
             pygame.display.flip()
         return 0
