@@ -4,6 +4,9 @@ from pygame.locals import *
 # Medidas de la ventana principal
 WIDTH = 1145
 HEIGHT = 600
+
+# Clases
+# ---------------------------------------------------------------------
 # CLASE QUE CREA DISCO
 class Disco(pygame.sprite.Sprite):
     def __init__(self):
