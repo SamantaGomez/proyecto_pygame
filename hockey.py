@@ -4,6 +4,9 @@ from pygame.locals import *
 # Medidas de la ventana principal
 WIDTH = 1145
 HEIGHT = 600
+
+# Clases
+# ---------------------------------------------------------------------
 # CLASE QUE CREA DISCO
 class Disco(pygame.sprite.Sprite):
     def __init__(self):
@@ -129,8 +132,12 @@ def ganador(goles):
                 mensaje = self.fuente.render(("Ingrese su nombre"), 0, (26, 45, 225))
                 superficie.blit(mensaje, (10, 30))
 
+<<<<<<< HEAD
             pygame.display.flip()
             
+=======
+            pygame.display.flip()				
+>>>>>>> ac4d7924faf0d4c42281f5002fc88b4021e17ddc
             #Aqui creamos el archivo con formato txt para almacenar los nombres de los jugadpores ganadores
         def creartxt(self, ):
             archi = open('datos.txt', 'w') #guardo los datos de los jugadores
@@ -162,7 +169,11 @@ def ganador(goles):
             screen = pygame.display.set_mode((894, 550))  #muestro la tabla de puntajes al finalizar el juego acabar tiempo y demas 
             pygame.display.set_caption("MARCADOR")
             estiloLetra = pygame.font.SysFont("Broadway", 45)
+<<<<<<< HEAD
             fondo = pygame.image.load("medalla.png").convert()
+=======
+            fondo = pygame.image.load("final.png").convert()
+>>>>>>> ac4d7924faf0d4c42281f5002fc88b4021e17ddc
             sonidoMenu = pygame.mixer.music.load("fin.mp3")
             pygame.mixer.music.play(1)
             ingresoTXT = Inicio()
@@ -190,7 +201,11 @@ def ganador(goles):
             screen = pygame.display.set_mode((894, 550))
             pygame.display.set_caption("MARCADOR")
             estiloLetra = pygame.font.SysFont("Broadway", 35)
+<<<<<<< HEAD
             fondo = pygame.image.load("medalla.png").convert()
+=======
+            fondo = pygame.image.load("final.png").convert()
+>>>>>>> ac4d7924faf0d4c42281f5002fc88b4021e17ddc
 
             pygame.init()
             sonidoMenu = pygame.mixer.music.load("menu.mp3")
@@ -331,7 +346,11 @@ def main(decision):
 
             pygame.display.flip()
         return 0
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> ac4d7924faf0d4c42281f5002fc88b4021e17ddc
 def puntos():
     print("Sus puntos son:")
     if __name__ == '__main__':
@@ -342,12 +361,21 @@ def puntos():
         screen = pygame.display.set_mode((800, 550))
         pygame.display.set_caption("MARCADOR FIN DE JUEGO")
         estiloLetra = pygame.font.SysFont("Broadway", 45)
+<<<<<<< HEAD
         fondo = pygame.image.load("medalla.png").conv
         # Musica de fondo para la impresion del marcadorert()#se muestra la imagen al final del juego
         menu = Menu(opciones)
         pygame.init()
         sonidoMenu = pygame.mixer.music.load("fin.mp3")
         pygame.mixer.music.play(6)
+=======
+        fondo = pygame.image.load("medalla.png").convert()#se muestra la imagen al final del juego
+        menu = Menu(opciones)
+        # Musica de fondo para la impresion del marcador
+        pygame.init()
+        sonidoMenu = pygame.mixer.music.load("fin.mp3")
+        pygame.mixer.music.play(4)
+>>>>>>> ac4d7924faf0d4c42281f5002fc88b4021e17ddc
 
         while not salir:
 
@@ -361,7 +389,11 @@ def puntos():
             mensaje = estiloLetra.render(("MARCADOR"), 0, (206, 45, 225))
             screen.blit(mensaje, (310, 0))
             pygame.display.flip()
+<<<<<<< HEAD
             pygame.time.delay(6)
+=======
+            pygame.time.delay(10)
+>>>>>>> ac4d7924faf0d4c42281f5002fc88b4021e17ddc
         pygame.display.flip()
 
 class Menu:
@@ -476,5 +508,10 @@ def menu_inicio():
             menu.imprimir(screen)
 
             pygame.display.flip()
+<<<<<<< HEAD
             pygame.time.delay(6)
 menu_inicio()
+=======
+            pygame.time.delay(10)
+menu_inicio()
+>>>>>>> ac4d7924faf0d4c42281f5002fc88b4021e17ddc
